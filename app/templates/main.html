@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% block content %}
+<table>
+<tr align = "center"><td>
+<table>
+	<tr><td><font size="60">Scrum Board</font></td></tr>
+	<td align = "right"><font size="2">2020112186 / 구동재</font></td>
+</table>
+<br><br>
+</td></tr>
+<td>
+<table>
+	<th> Dec. </th>
+	{% for i in range(31) %}
+		<th> {{ '%02d' % (i + 1) }} </th>
+	{% endfor %}
+	<tr align = "center">
+		<td> To Do </td>
+		{% for i in range(31) %}
+			{% if day_stack[i].todo_stack == 0 %}
+				<td></td>
+			{% else %}
+				<td bgColor = "#00FF00"></td>
+			{% endif %}
+		{% endfor %}
+	</tr>
+	<tr align = "center">
+		<td> Doing </td>
+		{% for i in range(31) %}
+			{% if day_stack[i].doing_stack == 0 %}
+				<td></td>
+			{% else %}
+				<td bgColor = "#00FF00"></td>
+			{% endif %}
+		{% endfor %}
+	</tr>
+	<tr align = "center">
+		<td> Done </td>
+		{% for i in range(31) %}
+			{% if day_stack[i].done_stack == 0 %}
+				<td></td>
+			{% else %}
+				<td bgColor = "#00FF00"></td>
+			{% endif %}
+		{% endfor %}
+	</tr>
+</table>
+</td>
+</table>
+<br><br><br>
+<table border = "1" bgColor = "#F1F0DA">
+	<th> To Do </th>
+	<th> Doing </th>
+	<th> Done </th>
+	<tr>
+		<td>
+			<table>
+				<thead>
+					<tr>
+						<th> 제목 </th>
+						<th> 기간 </th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if job_list %}
+						{% for job in job_list %}
+							{% if job.job_class == 0 %}
+							<tr>
+								<td>
+							<a href = "{{ url_for('main.detail', job_id = job.id) }}"> {{ job.subject }} </a>
+								</td>
+								<td> 12.{{ job.start_day }}. ~ 12.{{ job.end_day }}</td>
+							</tr>
+							{% endif %}
+						{% endfor %}
+					{% else %}
+					<tr>
+						<td colspan = "3"> None </td>
+					</tr>
+					{% endif %}
+				</tbody>
+			</table>
+		</td>
+		<td>
+			<table>
+				<thead>
+					<tr>
+						<th> 제목 </th>
+						<th> 기간 </th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if job_list %}
+						{% for job in job_list %}
+							{% if job.job_class == 1 %}
+							<tr>
+								<td>
+							<a href = "{{ url_for('main.detail', job_id = job.id) }}"> {{ job.subject }} </a>
+								</td>
+								<td> 12.{{ job.start_day }}. ~ 12.{{ job.end_day }}</td>
+							</tr>
+							{% endif %}
+						{% endfor %}
+					{% else %}
+					<tr>
+						<td colspan = "3"> None </td>
+					</tr>
+					{% endif %}
+				</tbody>
+			</table>
+		</td>
+		<td>
+			<table>
+				<thead>
+					<tr>
+						<th> 제목 </th>
+						<th> 기간 </th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if job_list %}
+						{% for job in job_list %}
+							{% if job.job_class == 2 %}
+							<tr>
+								<td>
+							<a href = "{{ url_for('main.detail', job_id = job.id) }}"> {{ job.subject }} </a>
+								</td>
+								<td> 12.{{ job.start_day }}. ~ 12.{{ job.end_day }}</td>
+							</tr>
+							{% endif %}
+						{% endfor %}
+					{% else %}
+					<tr>
+						<td colspan = "3"> None </td>
+					</tr>
+					{% endif %}
+				</tbody>
+			</table>
+		</td>
+	</td>
+</table>
+<a href = "{{ url_for('main.create') }}"> <button type = "button"> Register </button></a>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+	<h1> To Do </h1>
+	<form method = "post">
+		
+		{{ form.csrf_token }}
+		
+		{{ form.subject.label }}
+		{{ form.subject() }}
+		<br>
+		{{ form.content.label }}
+		{{ form.content() }}
+		<br>
+		{{ form.start_day.label }}
+		{{ form.start_day() }}일
+		{{ form.end_day.label }}
+		{{ form.end_day() }}일
+		<br>
+		{% if form.errors %}
+			{% for field, erros in form.erros.items() %}
+				<strong> {{ form[field].label }} </strong>
+				<ul>
+					{% for error in errors %}
+						<li> {{ error }} </li>
+					{% endfor %}
+				</ul>
+			{% endfor %}
+		{% endif %}
+		
+		<button type = "submit"> Save </button>
+	</form>
+</div>
+{% endblock %}
